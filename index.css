@@ -1,0 +1,234 @@
+@import "tailwindcss";
+@import "katex/dist/katex.min.css";
+@import url('https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Inter:wght@400;700;900&family=Playfair+Display:ital,wght@0,400;0,900;1,400&family=Poppins:wght@400;700;900&family=Montserrat:wght@300;400;700&family=Space+Grotesk:wght@300;700;900&family=JetBrains+Mono:wght@400;700&display=swap');
+
+:root {
+  /* Default / Common */
+  --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --accent: #6366f1;
+  --ink: #0f172a;
+  --ink-muted: #64748b;
+  --bg: #f8fafc;
+  --gray-m: #f1f5f9;
+  --line: #e2e8f0;
+  --panel-bg: #ffffff;
+  --font-primary: "Inter", sans-serif;
+  --font-secondary: "Inter", sans-serif;
+  --bd-width: 1px;
+  --radius: 4px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.1);
+  --rotate: 0deg;
+  --rotate-alt: 0deg;
+  --intensity: 0;
+}
+
+/* --- KIDS THEME --- */
+.theme-kids {
+  --accent: #ff4d4d;
+  --ink: #2b2b2b;
+  --ink-muted: #666666;
+  --bg: #fffbf2;
+  --gray-m: #e6e0d4;
+  --line: #2b2b2b;
+  --panel-bg: #fffefe;
+  --font-primary: "Gochi Hand", cursive;
+  --font-secondary: "Inter", sans-serif;
+  --bd-width: 6px;
+  --radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  --shadow: 6px 6px 0px var(--line);
+  --rotate: -1deg;
+  --rotate-alt: 1deg;
+  --intensity: 1;
+}
+
+[data-theme='dark'] .theme-kids,
+[data-theme='dark'].theme-kids {
+  --bg: #1a1a1a;
+  --ink: #f0f0f0;
+  --ink-muted: #a0a0a0;
+  --line: #f0e68c;
+  --panel-bg: #222222;
+  --shadow: 6px 6px 0px #333333;
+}
+
+/* --- ADULT THEME --- */
+.theme-adult {
+  --accent: #111111;
+  --ink: #111111;
+  --ink-muted: #555555;
+  --bg: #ffffff;
+  --gray-m: #f8f8f8;
+  --line: #e2e8f0;
+  --panel-bg: #ffffff;
+  --font-primary: "Playfair Display", serif;
+  --font-secondary: "Inter", sans-serif;
+  --bd-width: 1px;
+  --radius: 4px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.05);
+  --rotate: 0deg;
+  --rotate-alt: 0deg;
+  --intensity: 0;
+}
+
+[data-theme='dark'] .theme-adult,
+[data-theme='dark'].theme-adult {
+  --bg: #0a0a0a;
+  --ink: #e2e8f0;
+  --ink-muted: #94a3b8;
+  --accent: #f8fafc;
+  --line: #1e293b;
+  --panel-bg: #111111;
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+}
+
+@theme {
+  --color-accent: var(--accent);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-bg: var(--bg);
+  --color-gray-m: var(--gray-m);
+  
+  --font-primary: var(--font-primary);
+  --font-secondary: var(--font-secondary);
+  --font-mono: "monospace";
+
+  --color-blue-crt: #4da6ff;
+  --color-green-crt: #4dbb5f;
+  --color-yellow-crt: #ffcc00;
+  --color-orange-crt: #ff8c00;
+  --color-purple-crt: #9c27b0;
+  --color-red-crt: #ff4d4d;
+}
+
+.theme-teen::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: rgba(0, 255, 159, 0.2);
+  box-shadow: 0 0 30px rgba(0, 255, 159, 1);
+  animation: scan 6s linear infinite;
+  pointer-events: none;
+  z-index: 1001;
+}
+
+/* Gaming HUD elements */
+.theme-teen .hud-panel {
+  clip-path: polygon(
+    0 15px, 15px 0, 
+    calc(100% - 15px) 0, 100% 15px, 
+    100% calc(100% - 15px), calc(100% - 15px) 100%, 
+    15px 100%, 0 calc(100% - 15px)
+  );
+  position: relative;
+}
+
+.theme-teen .hud-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--accent);
+  clip-path: polygon(
+    0 15px, 15px 0, 
+    calc(100% - 15px) 0, 100% 15px, 
+    100% calc(100% - 15px), calc(100% - 15px) 100%, 
+    15px 100%, 0 calc(100% - 15px)
+  );
+  pointer-events: none;
+}
+
+.theme-teen .glitch-text {
+  text-shadow: 2px 0 #ff00ff, -2px 0 #00ffff;
+  animation: glitch 2s infinite linear alternate;
+}
+
+@keyframes glitch {
+  0% { text-shadow: 2px 0 #ff00ff, -2px 0 #00ffff; }
+  25% { text-shadow: -2px 0 #ff00ff, 2px 0 #00ffff; }
+  50% { text-shadow: 1px 1px #ff00ff, -1px -1px #00ffff; }
+  75% { text-shadow: -1px 1px #ff00ff, 1px -1px #00ffff; }
+  100% { text-shadow: 2px 0 #ff00ff, -2px 0 #00ffff; }
+}
+
+@keyframes scan {
+  0% { top: -10%; }
+  100% { top: 110%; }
+}
+
+@layer base {
+  body {
+    @apply bg-[var(--bg)] text-[var(--ink)] transition-all duration-500 overflow-x-hidden min-h-screen;
+    font-family: var(--font-primary);
+  }
+  
+  * {
+    @apply transition-colors duration-300;
+  }
+
+  /* Custom Scrollbar for Teen Theme */
+  .theme-teen *::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .theme-teen *::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+  }
+  .theme-teen *::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 10px;
+    box-shadow: 0 0 10px var(--accent);
+  }
+  
+  /* Adult Scrollbar */
+  .theme-adult *::-webkit-scrollbar {
+    width: 4px;
+  }
+  .theme-adult *::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 2px;
+  }
+}
+
+@layer utilities {
+  .theme-teen .hand-drawn-border,
+  .theme-teen .bg-\[var\(--panel-bg\)\] {
+    clip-path: polygon(
+      0 10px, 10px 0, 
+      calc(100% - 10px) 0, 100% 10px, 
+      100% calc(100% - 10px), calc(100% - 10px) 100%, 
+      10px 100%, 0 calc(100% - 10px)
+    );
+    border-radius: 2px !important;
+    position: relative;
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 10px rgba(0, 255, 159, 0.2) !important;
+  }
+
+  /* Add decorative border corners for teen HUD */
+  .theme-teen .hand-drawn-border::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 10px; height: 10px;
+    border-top: 2px solid var(--accent);
+    border-left: 2px solid var(--accent);
+    pointer-events: none;
+  }
+
+  .hand-drawn-border {
+    border-radius: var(--radius);
+  }
+  
+  .crayon-shadow {
+    box-shadow: var(--shadow);
+  }
+  
+  .theme-transition {
+    transition: all var(--transition);
+  }
+}
+
+[data-eye-comfort='true'] {
+  filter: sepia(0.3) saturate(0.8) contrast(0.9);
+}
